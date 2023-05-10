@@ -1,5 +1,4 @@
 #include "stdio.h"
-#include "string.h"
 
 int top = -1;
 char myStack[3];
@@ -22,8 +21,8 @@ char popItem(){
         char outElement = myStack[top];
         top--;
         return outElement;
-
     }
+    return 0;
 }
 
 int main(){
