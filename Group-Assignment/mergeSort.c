@@ -51,7 +51,7 @@ int main()
 
     // Measure the execution time
     clock_t end_time = clock();
-    double execution_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+    double execution_time = (double)(end_time - start_time) / (CLOCKS_PER_SEC / 1000);
 
     // Print the sorted array
     printf("Sorted array:\n");
@@ -61,7 +61,7 @@ int main()
     }
     printf("\n");
     printf("%s", lines);
-    printf("Execution time: %.4f seconds\n", execution_time);
+    printf("Execution time: %.4f milliseconds\n", execution_time);
     printf("Space required: %lu bytes\n", N * sizeof(int));
     printf("-----------------------END------------------------------------");
     return 0;
@@ -74,7 +74,7 @@ void merge_sort(int a[], int length)
 
 void merge_sort_recursion(int a[], int l, int r)
 {
-    // we stop recursion when l >= r
+    // we stop recursion when left bound value >= right bound value
     if (l < r)
     {
         // find the midpoint of l and r
