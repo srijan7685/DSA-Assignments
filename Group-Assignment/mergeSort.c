@@ -5,37 +5,37 @@
 void merge_sort(int a[], int length);
 void merge_sort_recursion(int a[], int l, int r);
 void merge_sorted_arrays(int a[], int l, int m, int r);
+char lines[] = "--------------------------------------------------------------\n";
 
 int main()
 {
+    printf("Implementation of Merge Sorting Algorithm\n");
+    printf("%s", lines);
     int N; // Number of elements in the array
-    printf("Enter the number of elements: ");
+    printf("Enter the size of array:\n>> ");
     scanf("%d", &N);
 
-    // Dynamically allocate memory for the array
     int* array = (int*)malloc(N * sizeof(int));
 
     // Seed the random number generator
     srand(time(NULL));
 
-    // Generate N random integer numbers without duplicates
+    // Generate N random integer
     for (int i = 0; i < N; i++)
     {
-        array[i] = i + 1; // Fill the array with numbers from 1 to N initially
+        array[i] = i + 1; // Fill the array with numbers from 1 to N at first
     }
 
-// Shuffle the array randomly
     for (int i = N - 1; i > 0; i--)
     {
         // Generate a random index between 0 and i
         int j = rand() % (i + 1);
-        // Swap the elements at indices i and j
+        // Swap the elements at index i and j
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
-
-    // Print the unsorted array
+    printf("%s", lines);
     printf("Unsorted array:\n");
     for (int i = 0; i < N; i++)
     {
@@ -53,9 +53,6 @@ int main()
     clock_t end_time = clock();
     double execution_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
 
-    // Sort the array using merge sort
-    merge_sort(array, N);
-
     // Print the sorted array
     printf("Sorted array:\n");
     for (int i = 0; i < N; i++)
@@ -63,12 +60,10 @@ int main()
         printf("%d ", array[i]);
     }
     printf("\n");
-
+    printf("%s", lines);
     printf("Execution time: %.4f seconds\n", execution_time);
     printf("Space required: %lu bytes\n", N * sizeof(int));
-
-    // Free the dynamically allocated memory
-    free(array);
+    printf("-----------------------END------------------------------------");
     return 0;
 }
 
