@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 void merge_sort(int a[], int length);
 void merge_sort_recursion(int a[], int l, int r);
@@ -6,18 +8,67 @@ void merge_sorted_arrays(int a[], int l, int m, int r);
 
 int main()
 {
-    // test array and length
-    int array[] = { 9, 4, 8, 1, 7, 0, 3, 2, 5, 6};
-    int length = 10;
+    int N; // Number of elements in the array
+    printf("Enter the number of elements: ");
+    scanf("%d", &N);
 
-    // sort the array using merge sort
-    merge_sort(array, length);
+    // Dynamically allocate memory for the array
+    int* array = (int*)malloc(N * sizeof(int));
 
-    // print out the array elements to verify they have been sorted
-    for (int i = 0; i < length; i++)
+    // Seed the random number generator
+    srand(time(NULL));
+
+    // Generate N random integer numbers without duplicates
+    for (int i = 0; i < N; i++)
+    {
+        array[i] = i + 1; // Fill the array with numbers from 1 to N initially
+    }
+
+// Shuffle the array randomly
+    for (int i = N - 1; i > 0; i--)
+    {
+        // Generate a random index between 0 and i
+        int j = rand() % (i + 1);
+        // Swap the elements at indices i and j
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    // Print the unsorted array
+    printf("Unsorted array:\n");
+    for (int i = 0; i < N; i++)
+    {
         printf("%d ", array[i]);
+    }
     printf("\n");
 
+    // Measure the execution time using clock()
+    clock_t start_time = clock();
+
+    // Sort the array using merge sort
+    merge_sort(array, N);
+
+    // Measure the execution time
+    clock_t end_time = clock();
+    double execution_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
+    // Sort the array using merge sort
+    merge_sort(array, N);
+
+    // Print the sorted array
+    printf("Sorted array:\n");
+    for (int i = 0; i < N; i++)
+    {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+
+    printf("Execution time: %.4f seconds\n", execution_time);
+    printf("Space required: %lu bytes\n", N * sizeof(int));
+
+    // Free the dynamically allocated memory
+    free(array);
     return 0;
 }
 
