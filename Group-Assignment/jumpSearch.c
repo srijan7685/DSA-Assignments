@@ -2,8 +2,11 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <limits.h>
+
 
 // Function to perform jump search
+char lines[] = "************************************************************\n";
 int jumpSearch(int arr[], int n, int target) {
     int step = sqrt(n);
     int prev = 0;
@@ -15,7 +18,7 @@ int jumpSearch(int arr[], int n, int target) {
             return -1;
     }
 
-    while (arr[prev] <= target) {
+    while (arr[prev] < target) {
         prev++;
         if (prev == fmin(step, n))
             return -1;
@@ -57,7 +60,6 @@ void printArray(int arr[], int n) {
 
 int main() {
     srand(time(0));
-    char lines[] = "************************************************************\n";
     printf("%s", lines);
     printf("####### Implementation of Jump search Algorithm #######\n");
     printf("%s", lines);
@@ -84,14 +86,14 @@ int main() {
     clock_t start = clock();
     int index = jumpSearch(arr, n, target);
     clock_t end = clock();
-    double timeTaken = ((double)(end - start)) / CLOCKS_PER_SEC * 1000;
+    double timeTaken = ((double) (start)) / CLOCKS_PER_SEC / 1000;
+    for (int i = 0; i < n; i++)
 
-    if (index != -1) {
-        printf("Element found at index %d.\n", index);
-    } else {
-        printf("Element not found.\n");
-    }
-
+        if (index != -1) {
+            printf("Element found at index %d.\n", index);
+        } else {
+            printf("Element not found 1.\n");
+        }
     printf("\n");
     printf("Time taken: %.4f ms.\n", timeTaken);
     printf("Space required: %lu bytes.\n", n * sizeof(int));
